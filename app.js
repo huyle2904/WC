@@ -10,7 +10,7 @@ const REFRESH_INTERVAL = 60_000; // 60s while tab visible
 
 const state = {
   matches: [],          // normalized matches
-  view: "groups",       // groups | knockout | schedule | standings
+  view: "schedule",     // groups | knockout | schedule | standings
   filterLive: false,
   filterUpcoming: false,
   search: "",

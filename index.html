@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Cup 2026 — Lịch thi đấu</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles-extra.css" />
+  <link rel="stylesheet" href="match-detail.css" />
+  <link rel="preconnect" href="https://site.api.espn.com" />
+  <link rel="preconnect" href="https://a.espncdn.com" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">⚽</div>
+      <div>
+        <h1>World Cup 2026</h1>
+        <div class="sub">Canada · Mexico · USA — 11/06 → 19/07/2026</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div id="liveIndicator" class="live-indicator hidden">
+        <span class="dot"></span><span id="liveCount">0</span> đang đá
+      </div>
+      <button id="refreshBtn" class="btn-ghost" title="Tải lại">
+        <span class="refresh-icon">↻</span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab" data-view="groups">Vòng bảng</button>
+    <button class="tab" data-view="knockout">Vòng loại trực tiếp</button>
+    <button class="tab active" data-view="schedule">Lịch theo ngày</button>
+    <button class="tab" data-view="standings">Bảng xếp hạng</button>
+  </nav>
+
+  <div class="filterbar">
+    <div class="filter-left">
+      <label class="checkbox">
+        <input type="checkbox" id="filterLive" />
+        <span>Chỉ đang đá</span>
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" id="filterUpcoming" />
+        <span>Chỉ sắp đá</span>
+      </label>
+    </div>
+    <div class="filter-right">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Tìm đội (VD: Brazil, Mexico)..."
+        autocomplete="off"
+      />
+    </div>
+  </div>
+
+  <main id="content" class="content">
+    <div id="loadingState" class="state">
+      <div class="spinner"></div>
+      <p>Đang tải lịch thi đấu...</p>
+    </div>
+  </main>
+
+  <template id="matchCardTpl">
+    <article class="match-card" data-match-id="">
+      <div class="match-meta">
+        <span class="match-stage"></span>
+        <span class="match-date"></span>
+      </div>
+      <div class="match-body">
+        <div class="team team-home">
+          <img class="team-logo" alt="" />
+          <span class="team-name"></span>
+          <span class="team-abbr"></span>
+        </div>
+        <div class="match-center">
+          <div class="match-score">
+            <span class="score-home">-</span>
+            <span class="score-sep">vs</span>
+            <span class="score-away">-</span>
+          </div>
+          <div class="match-status"></div>
+        </div>
+        <div class="team team-away">
+          <img class="team-logo" alt="" />
+          <span class="team-name"></span>
+          <span class="team-abbr"></span>
+        </div>
+      </div>
+      <div class="match-footer">
+        <span class="match-venue"></span>
+      </div>
+    </article>
+  </template>
+
+  <template id="groupCardTpl">
+    <section class="group-card">
+      <div class="group-header">
+        <h2 class="group-title"></h2>
+        <span class="group-progress"></span>
+      </div>
+      <table class="standings-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th class="al">Đội</th>
+            <th title="Số trận đã đá">ST</th>
+            <th title="Thắng">T</th>
+            <th title="Hòa">H</th>
+            <th title="Thua">B</th>
+            <th title="Bàn thắng">BT</th>
+            <th title="Bàn thua">BB</th>
+            <th title="Hiệu số">HS</th>
+            <th title="Điểm">Đ</th>
+          </tr>
+        </thead>
+        <tbody class="standings-body"></tbody>
+      </table>
+      <div class="group-matches"></div>
+    </section>
+  </template>
+
+  <footer class="bottombar">
+    <span>Dữ liệu: ESPN public API</span>
+    <span id="lastUpdated">—</span>
+  </footer>
+
+  <script src="rankings.js"></script>
+  <script src="squads.js"></script>
+  <script src="openfootball-loader.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

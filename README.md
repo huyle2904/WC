@@ -17,8 +17,16 @@ Static web app for visualizing the FIFA World Cup 2026 schedule, group stage, st
 
 ## Run locally
 
+Use any static file server. For example:
+
 ```bash
-node server.js
+npx serve .
+```
+
+Or with Python:
+
+```bash
+python -m http.server 5174
 ```
 
 Open:
@@ -27,7 +35,16 @@ Open:
 http://localhost:5174
 ```
 
-You can also deploy directly to Vercel as a static site.
+## Deploy on Vercel
+
+Import this repository as a static site:
+
+- Framework Preset: **Other**
+- Build Command: leave empty
+- Output Directory: `.`
+- Install Command: leave empty
+
+Do not set a Serverless Function entry point. This project only needs `index.html` and static assets.
 
 ## Notes
 
